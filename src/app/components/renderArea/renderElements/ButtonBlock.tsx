@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button } from '@mui/material'
 
-export const ButtonBlock = (text: string, id: string) => {
+export const ButtonBlock = (text: string) => {
   return (
-      <Button key={id} variant="contained">{text}</Button>
+      <Button style={{ marginTop: 15, marginBottom: 15 }} variant="contained">{text}</Button>
   )
 }

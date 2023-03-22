@@ -1,9 +1,8 @@
 import React from 'react'
-import { type IConstructorItem } from '../../../interfaces'
 
-export const HeadlineBlock = (text: string, id: string) => {
+export const HeadlineBlock = (text: string) => {
   return (
-        <h3 key={id}>
+        <h3>
             {text}
         </h3>
   )

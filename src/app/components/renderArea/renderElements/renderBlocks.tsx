@@ -9,13 +9,13 @@ export const renderBlocks = (blocks: IConstructorItem[]) => {
     const text = block.text ?? ''
     switch (block.type) {
       case 'image':
-        return ImageBlock(block.id)
+        return <div key={block.id}>{ImageBlock()}</div>
       case 'button':
-        return ButtonBlock(text, block.id)
+        return <div key={block.id}>{ButtonBlock(text)}</div>
       case 'paragraph':
-        return ParagraphBlock(text, block.id)
+        return <div key={block.id}>{ParagraphBlock(text)}</div>
       case 'headline':
-        return HeadlineBlock(text, block.id)
+        return <div key={block.id}>{HeadlineBlock(text)}</div>
       default:
         return null
     }

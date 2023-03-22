@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useAppDispatch } from '../../hooks'
 import { type IConstructorItem } from '../../interfaces'
 import styled from 'styled-components'
 import IconButton from '@mui/material/IconButton'
@@ -36,7 +35,7 @@ export const BlockElement = ({ block, onRemove, onMoveDown, onMoveUp, onTextChan
     onTextChange({ id, text: e.currentTarget.value })
   }
   return (
-      <BlockWrapper ref={ref} id={id} onClick={() => { setIsVisible(true) }}>
+      <BlockWrapper isVisible={isVisible} className='drop-zone' ref={ref} id={id} onClick={() => { setIsVisible(true) }}>
         <>
         {renderIcons(type)}
         <p style={{ marginBottom: 0, marginTop: 5 }}>{type}</p>
@@ -70,12 +69,12 @@ export const BlockElement = ({ block, onRemove, onMoveDown, onMoveUp, onTextChan
   )
 }
 
-const BlockWrapper = styled.div`
+const BlockWrapper = styled.div<{ isVisible: boolean }>`
   display: inline-block;
   max-width: 100%;
   padding: 25px 50px;
   position: relative;
-  background-color: #fff;
+  background-color: ${props => props.isVisible ? '#D9E7FF' : '#fff'} ;
   transition: 0.3s;
 `
 

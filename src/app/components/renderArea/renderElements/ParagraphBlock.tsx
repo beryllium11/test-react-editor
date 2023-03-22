@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const ParagraphBlock = (text: string, id: string) => {
+export const ParagraphBlock = (text: string) => {
   return (
-        <p key={id}>
+        <p>
             {text}
         </p>
   )

@@ -33,17 +33,18 @@ const addStandardBlock = (type: ItemType | null): [ItemType, string] => {
 export const ToolsArea = () => {
   const dispatch = useAppDispatch()
   const { addBlock } = editorSlice.actions
+
   const handleClick = useCallback((type: ItemType, text = '') => {
     dispatch(addBlock({ id: uniqid(), text, type }))
   }, [])
   const [type, setType] = useState<ItemType | null>()
-  const [prevType, setPrevType] = useState<ItemType>('headline')
+  const [updateEffect, setUpdateEffect] = useState<boolean>(false)
 
   const target = document.getElementById('drop-zone')
 
-  const dropEL = (event: DragEvent) => {
+  const dropEL = (event: any) => {
     event.preventDefault()
-    if (event.target === target || window.document.activeElement === target) {
+    if (event.target === target || event.target.classList.contains('drop-zone')) {
       if (type && target) {
         handleClick(...addStandardBlock(type))
         target.removeEventListener('drop', dropEL)
@@ -52,18 +53,20 @@ export const ToolsArea = () => {
   }
 
   const handleDragStart = (type: ItemType) => {
-    setType(type)
+    setType(() => {
+      setUpdateEffect(prevState => !prevState)
+      return type
+    })
   }
 
   useEffect(() => {
-    console.log('prevType', prevType, 'type', type)
     if (target) {
       target.addEventListener('dragover', (event) => {
         event.preventDefault()
       })
       target.addEventListener('drop', dropEL)
     }
-  }, [type])
+  }, [type, updateEffect])
 
   return (
         <ToolsAreaWrapper>
